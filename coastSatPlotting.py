@@ -53,6 +53,14 @@ def transectTimeSeries(transectCsvFile,  outputFolder, rollingPeriod=6):
 
 # Perhasp Can reduce regressionShapefileName and output folder from parameters
 def transectRegression(transectCsvFile, shorelineFile, transectsFile, regressionShapefileName, outputFolder):
+    """inputs: transectCsvFile - transect file output from coastsat
+                shorelineFile - takes the final .shp file of coastsat generated shorelines
+                transectsFile - the transect file generated to extract relative shoreline distance values with each shoreline
+        function reads in the files and calculates a linear regression (LR) at each transect location
+        finds middle shoreline (from all coastsat shorelines) to plot the LR coefficient spatially
+        makes spatial plot with aerial imagery as background with LR at each locations
+        ** needs some error handling**
+    """
     df = pd.read_csv(transectCsvFile, header=0, index_col=False)
     df = df.dropna(axis=0, how='any')
     df['dates'] = pd.to_datetime(df['dates'])
