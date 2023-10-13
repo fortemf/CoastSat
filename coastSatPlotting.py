@@ -56,6 +56,8 @@ def transectRegression(transectCsvFile, shorelineFile, transectsFile, regression
     """inputs: transectCsvFile - transect file output from coastsat
                 shorelineFile - takes the final .shp file of coastsat generated shorelines
                 transectsFile - the transect file generated to extract relative shoreline distance values with each shoreline
+                regressionShapefileName: output shape file name
+                outputFolder: where to store output files
         function reads in the files and calculates a linear regression (LR) at each transect location
         finds middle shoreline (from all coastsat shorelines) to plot the LR coefficient spatially
         makes spatial plot with aerial imagery as background with LR at each locations
