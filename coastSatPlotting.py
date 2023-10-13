@@ -12,7 +12,7 @@ from shapely.errors import ShapelyDeprecationWarning
 warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning)
 import contextily as ctx
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-import os
+
 
 
 
@@ -74,6 +74,8 @@ def transectRegression(transectCsvFile, shorelineFile, transectsFile, regression
 
     timeDistance = pd.Series(np.arange(1, timeInDays, timeInDays / len(df)))
     timeDistance = timeDistance.values.reshape(-1, 1)
+    maxYear = np.max(df['dates'].dt.year)
+    minYear = np.min(df['dates'].dt.year)
 
     plt.rcParams.update({'font.size': 18})
     for t in cols[2::]:
@@ -139,7 +141,7 @@ def transectRegression(transectCsvFile, shorelineFile, transectsFile, regression
     ax.set_xlim(xMin, xMax)
     ax.set_ylim(yMin, yMax)
     ctx.add_basemap(ax, crs=zz.crs, source=ctx.providers.Esri.WorldImagery, attribution_size=2, reset_extent=False)
-    ax.set_title('LRR [2008 - 2023] Satellite Derived Shorelines')
+    ax.set_title('LRR ' + str(minYear) + '-' + str(maxYear) + ' Satellite Derived Shorelines')
     ax.set_axis_off()
     fig.savefig(outputFolder + 'LRR.png')
 
